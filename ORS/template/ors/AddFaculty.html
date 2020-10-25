@@ -1,0 +1,185 @@
+
+
+<body style="background-color:pink;">
+{% include  "./Header.html"%}
+<div class="container">
+    <div>
+        <H2></H2>
+    </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: salmon;">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Faculty Information</h4>
+            </div>
+            <div class="modal-body">
+                {% if form.error  %}
+                <p style="color: red;"> {{form.message}}</p>
+                {% else %}
+                <p style="color: green;"> {{form.message}}</p>
+                {% endif %}
+
+                <form method="POST">
+                    <input type="hidden" name="id" value="{{form.id}}">
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">firstName * </label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="firstName" value="{{form.firstName}}" placeholder="enter your first name">
+                            <span style="color: red;"> {{form.inputError.firstName}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">Last Name * </label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="lastName" value="{{form.lastName}}" placeholder="enter your last name">
+                            <span style="color: red;"> {{form.inputError.lastName}} </span>
+
+                        </div>
+                    </div>
+                    <!-- <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">College </label>
+                        <div class="col-lg-9">
+                            <select class="form-control" name="college_ID">
+                                {% for form in collegeList %}
+                                <option value="{{form.id}}">{{form.id}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div> -->
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">email * </label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="email" value="{{form.email}}" placeholder="enter your email id">
+                            <span style="color: red;"> {{form.inputError.email}} </span>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">password </label>
+                        <div class="col-lg-9">
+                            <!-- <input style="cursor: pointer" type="date" class="form-control" name="password"
+                                value="{{form.password}}"> -->
+                                <input class="form-control" name="password" value="{{form.password}}" placeholder="enter your password">
+
+                            <span style="color: red;"> {{form.inputError.password}} </span>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">mobileNumber </label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="mobileNumber" value="{{form.mobileNumber}}">
+                            <span style="color: red;"> {{form.inputError.mobileNumber}} </span></div>
+                    </div> -->
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">address </label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="address" value="{{form.address}}" placeholder="enter your address">
+                            <span style="color: red;"> {{form.inputError.address}} </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">gender </label>
+                        <div class="col-lg-9">
+                            <select class="form-control" name="gender">
+                                <option>--Select--</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <!-- <input class="form-control" name="gender" value="{{form.gender}}"> -->
+                            <span style="color: red;"> {{form.inputError.gender}} </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">dob </label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="dob" value="{{form.dob}}" placeholder="enter your dob">
+                            <span style="color: red;"> {{form.inputError.dob}} </span>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">Date Of Birth </label>
+                        <div class="col-lg-9">
+                            <input style="cursor: pointer" readonly id="datepicker" name="dob" value="{{form.dob}}" class="form-control"
+                                placeholder="DD-MM-YYYY" />
+                            <span style="color: red;"> {{form.inputError.dob}} </span>
+                        </div>
+                    </div> -->
+    
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">college_ID </label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="college_ID" value="{{form.college_ID}}" placeholder="enter your college_id">
+                            <span style="color: red;"> {{form.inputError.college_ID}} </span>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">College_ID <span style="color: red;"> * </span></label>
+                        <div class="col-lg-9">
+                            <select class="form-control" name="college_ID">
+                                {% for form in collegeList %}
+                                <option value="{{form.id}}">{{form.id}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>  -->
+
+                    <!-- <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">collegeName </label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="collegeName" value="{{form.collegeName}}">
+                            <span style="color: red;"> {{form.inputError.collegeName}} </span>
+                        </div>
+                    </div> -->
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">subject_ID </label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="subject_ID" value="{{form.subject_ID}}" placeholder="enter your subject_id">
+                            <span style="color: red;"> {{form.inputError.subject_ID}} </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">subjectName </label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="subjectName" value="{{form.subjectName}}" placeholder="enter your subject name">
+                            <span style="color: red;"> {{form.inputError.subjectName}} </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">course_ID </label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="course_ID" value="{{form.course_ID}}" placeholder="enter your course_id">
+                            <span style="color: red;"> {{form.inputError.course_ID}} </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">courseName </label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="courseName" value="{{form.courseName}}" placeholder="enter your course name">
+                            <span style="color: red;"> {{form.inputError.courseName}} </span>
+                        </div>
+                    </div>
+   
+   
+
+                    <div class="form-group row">
+                        <div class="col-lg-4" style="margin-left:150px; padding-top:10px;">
+                            <button type="submit" class="btn btn-primary form-control">Save
+                                <span class="fas fa-paper-plane"></span>
+                            </button>
+                            <button type="reset"class="btn btn-primary form-control" style=" padding-top: 10px;">Reset
+                                <span class="fas fa-paper-plane"></span>
+                            </button>
+                            <!-- <a href="/ORS/AddFacultyList"> List </a> -->
+                        </div>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+</body>
+{% include  "./Footer.html"%}

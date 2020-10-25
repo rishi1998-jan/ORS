@@ -1,0 +1,128 @@
+
+
+
+<body style="background-color: pink;">
+{% include  "./Header.html"%}
+
+<div class="modal-dialog">
+    {% if form.error  %}
+    <p style="color: red;"> {{form.message}}</p>
+    {% else %}
+    <p style="color: green;"> {{form.message}}</p>
+    {% endif %}
+
+    <div class="modal-content" style="background-color: tomato;">
+        <div class="modal-header text-center">
+            <h4 class="modal-title ">My Profile Information</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="id" value="{{form.id}}">
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label class="col-lg-3 form-control-label">First Name * </label>
+                    <div class="col-lg-9">
+                        <p name="firstName" value="{{form.firstName}}" class="form-control">{{form.firstName}}</p>
+                        <span style="color: red;"> {{form.inputError.firstName}} </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 form-control-label">Last Name * </label>
+                    <div class="col-lg-9">
+                        <p class="form-control" name="lastName" value="{{form.lastName}}">{{form.lastName}}</p>
+                        <span style="color: red;"> {{form.inputError.lastName}} </span> </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 form-control-label">Login * </label>
+                    <div class="col-lg-9">
+                        <p class="form-control" name="login" value="{{form.login}}">{{form.login_id}}</p>
+                        <span style="color: red;"> {{form.inputError.login_id}} </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 form-control-label">Password * </label>
+                    <div class="col-lg-9">
+                        <p class="form-control" name="password" value="{{form.password}}">{{form.password}}</p>
+                        <span style="color: red;"> {{form.inputError.password}} </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 form-control-label">Date Of Birth </label>
+                    <div class="col-lg-9">
+                        <p style="cursor: pointer" name="dob" value="{{form.dob}}" class="form-control"
+                            placeholder="DD-MM-YYYY">{{form.dob}}</p>
+                        <span style="color: red;"> {{form.inputError.dob}} </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 form-control-label">Mobile</label>
+                    <div class="col-lg-9">
+                        <p class="form-control" name="mobileNumber" value="{{form.mobileNumber}}">{{form.mobileNumber}}</p>
+                        <span style="color: red;"> {{form.inputError.mobileNumber}} </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 form-control-label">Gender </label>
+                    <div class="col-lg-9">
+                        <p class="form-control" name="gender" value="{{form.gender}}">{{form.gender}}</p>
+                        <!--
+                         <select class="form-control" name="gender">
+                            <option>--Select--</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        -->
+                    </div>
+                </div>
+<!--
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-primary form-control">Save
+                            <span class="fas fa-paper-plane"></span>
+                        </button>
+                    </div>
+                </div>
+                
+-->
+                            
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <!-- <button type="submit" class="btn btn-primary form-control">Save
+                        <span class="fas fa-paper-plane"></span>
+                    </button> -->
+                    <a href="/ORS/User"> List </a>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                    <div class="col-lg-4" style="margin-left: 150px; padding-top: 10px;">
+                    <button type="submit" class="btn btn-primary form-control">Save
+                        <span class="fas fa-paper-plane"></span>
+                    </button>
+                    <button type="reset"class="btn btn-primary form-control" style=" padding-top: 10px;">Reset
+                        <span class="fas fa-paper-plane"></span>
+                    </button>
+
+                    <!-- <a href="/ORS/RoleList"> List </a> -->
+                </div>  
+
+                <!-- <div>
+                    <a href="/ORS/User/{{form.id}}">
+                        <font type="button" ng-click="display(data.id)" data-target="#update"
+                            data-toggle="modal" class="btn btn-primary">
+                            <i class="fas fa-edit">
+                            </i>
+                        </font>
+                    </a>
+                </div> -->
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+</body>
+{% include  "./Footer.html"%}
+</div>

@@ -1,0 +1,101 @@
+
+
+
+{% include  "./Header.html"%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ORS</title>
+</head>
+
+<body style="background-color: rgb(79, 224, 135);">
+<div class="container">
+    <div>
+        <H2>Timetable List</H2>
+    </div>
+    <form method="POST">
+        <div class="form-group row">
+            <div class="col-lg-3">
+                <input class="form-control" name="courseName" value="{{form.courseName}}" placeholder="enter course name">
+            </div>
+            <div class="col-lg-3">
+                <input class="form-control" name="semester" value="{{form.semester}}" placeholder="enter semester">
+            </div>
+            <div class="col-lg-1">
+                <button class="btn btn-primary">Search
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="offset-lg-4">
+        <a href="/ORS/TimeTable">
+
+            <font class="btn btn-success " data-target="#update" data-toggle="modal" ng-click="display()">Add
+                <i class="fas fa-plus-circle"></i>
+            </font>
+
+        </a>
+    </div>
+</div>
+
+<table border="1" width="50%">
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-sm table-bordered table-hover table-responsive-sm">
+            <thead class="thead-dark">
+                <th scope="row">#</th>
+                <th scope="row">examTime
+                </th>
+                <th scope="row">examDate
+                </th>
+                <th scope="row">subject_ID
+                </th>
+                <th scope="row">subjectName
+                </th>
+                <th scope="row">course_ID
+                </th>
+                <th scope="row">courseName
+                </th>
+                <th scope="row">semester
+                </th>
+                <th scope="row">EDIT</th>
+                <th scope="row">DELETE</th>
+            </thead>
+            <tbody>
+                {% for e in pageList %}
+                <tr>
+                    <td>{{e.id}}</td>
+                    <td>{{e.examTime}}</td>
+                    <td>{{e.examDate}}</td>
+                    <td>{{e.subject_ID}}</td>
+                    <td>{{e.subjectName}}</td>
+                    <td>{{e.course_ID}}</td>
+                    <td>{{e.courseName}}</td>
+                    <td>{{e.semester}}</td>
+                    <td><a href="/ORS/TimeTable/edit/{{e.id}}"> Edit
+
+                        <font data-target="#update" data-toggle="modal">
+                            <i>
+                            </i>
+                        </font></a>
+                    </td>
+                    <td>
+                        <a href="/ORS/TimeTableList/delete/{{e.id}}">Delete
+                        <i>
+                        </i>
+                        </a>
+                    </td>                
+            </tr>
+                {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
+
+{% include  "./Footer.html"%}

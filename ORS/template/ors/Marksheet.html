@@ -1,0 +1,91 @@
+
+
+<body style="background-color: pink;">
+{% include  "./Header.html"%}
+<div class="container">
+    <div>
+    </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: tomato;">
+            <div class="modal-header text-center">
+                <h4 class="modal-title " style="padding-left: 125px;">Marksheet Information</h4>
+            </div>
+            <form class="form" method="POST">
+
+                {% if form.error  %}
+                <p style="color: red;"> {{form.message}}</p>
+                {% else %}
+                <p style="color: green;"> {{form.message}}</p>
+                {% endif %}
+                <div class="modal-body">
+                    <input type="hidden" name="id" value="{{form.id}}">
+
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">Roll No <span style="color: red;"> * </span> </label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="rollNumber" value="{{form.rollNumber}}" placeholder="enter your roll number">
+                            <span style="color: red;"> {{form.inputError.rollNumber}} </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">Name <span style="color: red;"> * </span> </label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="name" value="{{form.name}}" placeholder="enter your name">
+                            <span style="color: red;"> {{form.inputError.name}} </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">Physics *</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="number" name="physics" value="{{form.physics}}" placeholder="enter your physics marks">
+                            <span style="color: red;"> {{form.inputError.physics}} </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">Chemistry *</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="number" name="chemistry" value="{{form.chemistry}}" placeholder="enter your cheistry marks">
+                            <span style="color: red;"> {{form.inputError.chemistry}} </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 form-control-label">Maths *</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="number" name="maths" value="{{form.maths}}" placeholder="enter your maths marks">
+                            <span style="color: red;"> {{form.inputError.maths}} </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Student <span style="color: red;"> * </span></label>
+                        <div class="col-lg-9">
+                            <select class="form-control" name="student_ID">
+                                <option>--Select--</option>
+                                {% for form in studentList %}
+                                <option value="{{form.id}}">{{form.id}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                            <div class="col-lg-4" style="margin-left: 150px; padding-top: 10px;">
+                            <button type="submit" class="btn btn-primary form-control">Save
+                                <span class="fas fa-paper-plane"></span>
+                            </button>
+                            
+                            <button type="reset"class="btn btn-primary form-control" style=" padding-top: 10px;">Reset
+                                <span class="fas fa-paper-plane"></span>
+                            </button>
+                            <!-- <a href="/ORS/MarksheetList"> List </a> -->
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</body>
+{% include  "./Footer.html"%}

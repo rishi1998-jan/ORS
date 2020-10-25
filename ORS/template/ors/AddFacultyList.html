@@ -1,0 +1,117 @@
+
+
+{% include  "./Header.html"%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+</head>
+
+<body style="background-color: rgb(79, 224, 135);">
+<div class="container">
+    <div>
+        <H2>Faculty </H2>
+    </div>
+    <form method="POST">
+        <div class="form-group row">
+            <div class="col-lg-3">
+                <input class="form-control" name="email" value="{{form.email}}" placeholder="enter email id">
+            </div>
+            <div class="col-lg-3">
+                <input class="form-control" name="firstName" value="{{form.firstName}}" placeholder="enter first name">
+            </div>
+            <div class="col-lg-1">
+                <button class="btn btn-primary">Search
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+    </form>
+    <div class="offset-lg-4">
+        <a href="/ORS/AddFaculty">
+
+            <font class="btn btn-success " data-target="#update" data-toggle="modal" ng-click="display()">Add
+                <i class="fas fa-plus-circle"></i>
+     </font>
+
+        </a>
+    </div>
+</div>
+
+<table border="1" width="50%">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-sm table-bordered table-hover table-responsive-sm">
+                <thead class="thead-dark">
+                    <th scope="row">#</th>
+                    <th scope="row">firstName
+                    </th>
+                    <th scope="row">lastName
+                    </th>
+                    <th scope="row">email
+                    </th>
+                    <th scope="row">password
+                    </th>
+                    <th scope="row">address
+                    </th>
+                    <th scope="row">gender
+                    </th>
+                    <th scope="row">dob
+                    </th>
+                    <!-- <th scope="row">dob
+                    </th> -->
+                    <th scope="row">college_ID
+                    </th>
+                    <th scope="row">subject_ID
+                    </th>
+                    <th scope="row">subjectName
+                    </th>
+                    <th scope="row">course_ID
+                    </th>
+                    <th scope="row">courseName
+                    </th>                   
+                    <th scope="row">EDIT</th>
+                    <th scope="row">DELETE</th>
+                </thead>
+                <tbody>
+                    {% for e in pageList %}
+                    <tr>
+                        <td>{{e.id}}</td>
+                        <td>{{e.firstName}}</td>
+                        <td>{{e.lastName}}</td>
+                        <td>{{e.email}}</td>
+                        <td>{{e.password}}</td>
+                        <td>{{e.address}}</td>
+                        <td>{{e.gender}}</td>
+                        <td>{{e.dob}}</td>
+                        <td>{{e.college_ID}}</td>
+                        <td>{{e.subject_ID}}</td>
+                        <td>{{e.subjectName}}</td>
+                        <td>{{e.course_ID}}</td>
+                        <td>{{e.courseName}}</td>
+
+                        <td><a href="/ORS/Student/edit/{{e.id}}"> Edit
+    
+                                <font data-target="#update" data-toggle="modal">
+                                    <i>
+                                    </i>
+                                </font></a>
+                        </td>
+                        <td>
+                            <a href="/ORS/StudentList/delete/{{e.id}}">Delete
+                            <i>
+                            </i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+    </html>
+
+{% include  "./Footer.html"%}

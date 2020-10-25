@@ -1,0 +1,603 @@
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+<!--Used for icon-->
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+{%load static%}
+<script src="{%static "jquery-1.12.4.js"%}"></script>
+<script src="{%static "jquery-ui.js"%}"></script>
+<link rel="stylesheet" href="{%static "jquery-ui.css"%}">
+<script>
+	$(function() {
+		$("#datepicker").datepicker({
+			changeMonth : true,
+			changeYear : true,
+			//dateFormat : 'yy/mm/dd',
+			yearRange:"-57:-18",
+			defaultDate : "2020/01/01/",
+		});
+	});
+	
+	$(function(){
+		$("#datesun").datepicker({
+			 beforeShowDay:
+				function(dt){
+				return[dt.getDay()==0 ? false:true]     ///// to disable sunday
+			}, 
+			changeMonth:true,
+			changeYear:true,
+			stepMonths: 12,
+			yearRange:'+0:+5',
+			yearRange:"+10:"
+			
+			// defaultDate:"2019/01/01"
+		});	
+	});
+	$(function(){
+		$("#datefac").datepicker({
+			 beforeShowDay:
+				function(dt){
+				return[dt.getDay()==0 ? false:true]     ///// to disable sunday
+			}, 
+			changeMonth:true,
+			changeYear:true,
+			yearRange:"-57:+0",	
+			defaultDate:"2018/01/01"
+			//defaultDate:"01/01/1999"
+		});	
+	}); 
+	
+    function selectAll(source) {
+    	checkboxes = document.getElementsByName('ids');
+    	for (var i = 0, n = checkboxes.length; i < n; i++) {
+    		checkboxes[i].checked = source.checked;
+    	}
+    }
+    
+    function selectone(so) {
+    	checkboxes = document.getElementById('mainbox');
+    	unbox = document.getElementsByName('ids');
+    	var box = false;
+    	for (var i = 0, n = unbox.length; i < n; i++) {
+    		if (unbox[i].checked == true) {
+    			box = true;
+    		} else {
+    			box = false;
+    			break;
+    		}
+    	}
+    	checkboxes.checked = box;
+    }
+</script>
+<!-- <style>
+    .imge{
+        height: 500px;
+        width: 100%;
+        border: 2px solid red;
+        background-image:url('{{ STATIC_URL }}/img2.JPG');
+        background-repeat:no-repeat;
+    }
+</style> -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- <a class="navbar-brand" href="/ORS/Login">NCS</a> -->
+    <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            
+                <!-- <li class="nav-item">
+                        <i class="fab fa-wpforms"style="font-size:35px;color:white; padding-left:15px; padding-top:5px"></i>
+                       
+                                
+                            </li>    
+            <li class="nav-item">
+                    
+                    <a class="nav-link" href="/ORS/Registration">Registration</a>
+            </li> -->
+            <!-- <li class="nav-item">
+                    <i class="fa fa-asterisk" style="font-size:30px;color:white; padding-left:15px; padding-top:15px"></i>
+                    
+                            
+                  </li>
+                <li class="nav-item">
+                        
+                    <a class="nav-link" href="/ORS/Login">Login</a> -->
+            {% if request.session.name == "Admin" %}
+              
+            </li>
+            <li class="nav-item">
+                <i class="fa fa-user" style="font-size:30px;color:white; padding-left:15px; padding-top:15px"></i>
+                
+                        
+              <!-- </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/User">User</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/UserList">UserList</a>
+            </li> -->
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/ORS/User" id="navbardrop" data-toggle="dropdown">
+                    User
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/ORS/User">User</a>  
+                    <a class="dropdown-item" href="/ORS/UserList">UserList</a>
+                  
+                </div>
+              </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="/ORS/College">College</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/CollegeList">CollegeList</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/Course">Course</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/CourseList">CourseList</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/Marksheet">Marksheet</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/MarksheetList">MarksheetList</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/Role">Role</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/RoleList">RoleList</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/ORS/Role" id="navbardrop" data-toggle="dropdown">
+                  Role
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/ORS/Role">Role</a>  
+                    <a class="dropdown-item" href="/ORS/RoleList">RoleList</a>
+                  
+                </div>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/Student">Student</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/StudentList">StudentList</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/Subject">Subject</a>
+            </li> -->
+            
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="/ORS/UserList">UserList</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/College">College</a>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="/ORS/CollegeList">CollegeList</a>
+            </li> -->
+           
+            <li class="nav-item">
+                <i class="fas fa-university" style="font-size:30px;color:white; padding-left:15px; padding-top:15px"></i>
+
+
+
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/ORS/College" id="navbardrop" data-toggle="dropdown">
+                        College
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/ORS/College">College</a>  
+                        <a class="dropdown-item" href="/ORS/CollegeList">CollegeList</a>
+                      
+                    </div>
+
+
+                  </li>
+                  <li class="nav-item">
+                    <i class="fa fa-book" style="font-size:30px;color:white; padding-left:15px; padding-top:15px"></i>
+
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/ORS/CourseList" id="navbardrop" data-toggle="dropdown">
+                        Course
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/ORS/Course">Course</a>  
+                        <a class="dropdown-item" href="/ORS/CourseList">CourseList</a>
+                      
+                    </div>
+                  </li>
+
+
+                <li class="nav-item">
+                    <i class="fa fa-certificate" style="font-size:30px;color:white; padding-left:15px; padding-top:15px"></i>
+           
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/ORS/Marksheet" id="navbardrop" data-toggle="dropdown">
+                        Marksheet
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/ORS/Marksheet">Marksheet</a>  
+                        <a class="dropdown-item" href="/ORS/MarksheetList">MarksheetList</a>
+                        <a class="dropdown-item" href="/ORS/MarksheetMeritList">MarksheetMeritList</a>
+                      
+                    </div>
+                  </li>
+
+
+
+                  <li class="nav-item">
+                    <i class="fa fa-users" style="font-size:30px;color:white; padding-left:15px; padding-top:15px"></i>
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/ORS/Role" id="navbardrop" data-toggle="dropdown">
+                        Role
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/ORS/Role">Role</a>  
+                        <a class="dropdown-item" href="/ORS/RoleList">RoleList</a>
+                      
+                    </div>
+                  </li>
+
+
+                  <li class="nav-item">
+                    <i class="fa fa-graduation-cap" style="font-size:30px;color:white; padding-left:15px; padding-top:15px"></i>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/ORS/Student" id="navbardrop" data-toggle="dropdown">
+                  Student
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/ORS/Student">Student</a>  
+                    <a class="dropdown-item" href="/ORS/StudentList">StudentList</a>
+                  
+                </div>
+              </li>
+
+
+              <li class="nav-item">
+                <i class="fas fa-book" style="font-size:30px;color:white; padding-left:15px; padding-top:15px"></i>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/ORS/Subject" id="navbardrop" data-toggle="dropdown">
+                  Subject
+                </a>
+                <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/ORS/Subject">Subject</a>
+                        <a class="dropdown-item" href="/ORS/SubjectList">SubjectList</a>
+                  
+                </div>
+              </li>
+              
+              
+              <li class="nav-item">
+                <i class="fa fa-university" style="font-size:30px;color:white; padding-left:15px; padding-top:15px"></i>
+
+              <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/ORS/AddFaculty" id="navbardrop" data-toggle="dropdown">
+                        AddFaculty
+                    </a>
+                    <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/ORS/AddFaculty">AddFaculty</a>
+                            <a class="dropdown-item" href="/ORS/AddFacultyList">AddFacultyList</a>
+                      
+                    </div>
+                  </li>  
+                
+                  <li class="nav-item">
+                    <i class="fa fa-calendar" style="font-size:30px;color:white; padding-left:15px; padding-top:15px"></i>
+
+                  <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/ORS/TimeTable" id="navbardrop" data-toggle="dropdown">
+                            TimeTable
+                        </a>
+                        <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/ORS/TimeTable">TimeTable</a>
+                                <a class="dropdown-item" href="/ORS/TimeTableList">TimeTableList</a>
+                          
+                        </div>
+                        <li class="nav-item">
+                            <i class="fas fa-info-circle" style="font-size:30px;color:white; padding-left:15px; padding-top:15px"></i>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/ORS/ChangePassword" id="navbardrop" data-toggle="dropdown">
+                                About
+                            </a>
+                            <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/ORS/ChangePassword">ChangePassword</a>
+                                    <a class="dropdown-item" href="/auth/Logout">LOGOUT</a>
+                                    <a class="dropdown-item" href="/ORS/MyProfile">MyProfile</a>
+  
+                            </div>
+                            
+
+               </li> 
+
+               <li class="nav-item">
+                <h6 style="color: yellow;" class="nav-link"> {{request.session.name}}</h6>
+            </li>
+            <li class="nav-item">
+                <h6 style="color:yellow;" class="nav-link"></h6>
+            </li>
+            {% elif request.session.name == "Student" %} 
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/User">Profile Update</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/ChangePassword">Change Password</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/AddFacultyList">Faculty List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/CollegeList">College List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/SubjectList">Subject List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/CourseList">Course List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/MarksheetList">Get Marksheet</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/MarksheetMeritList">Marksheet Merit</a>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="/ORS/Login"><button type="button">LOG OUT</button></a>
+            </li> -->
+            {% elif request.session.name == "Faculty" %}
+            <li class="nav-item">
+                <a class="nav-link" href="/ORS/User">Profile Update</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/ORS/College" id="navbardrop" data-toggle="dropdown">
+                    College
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/ORS/College">College</a>  
+                    <a class="dropdown-item" href="/ORS/CollegeList">CollegeList</a>
+                  
+                </div>
+              </li>
+        <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/ORS/CourseList" id="navbardrop" data-toggle="dropdown">
+                    Course
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/ORS/Course">Course</a>  
+                    <a class="dropdown-item" href="/ORS/CourseList">CourseList</a>
+                  
+                </div>
+              </li>
+
+
+
+       
+        <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/ORS/Marksheet" id="navbardrop" data-toggle="dropdown">
+                    Marksheet
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/ORS/Marksheet">Marksheet</a>  
+                    <a class="dropdown-item" href="/ORS/MarksheetList">MarksheetList</a>
+                    <a class="dropdown-item" href="/ORS/MarksheetMeritList">MarksheetMeritList</a>
+                  
+                </div>
+              </li>
+
+
+
+       
+        <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/ORS/Role" id="navbardrop" data-toggle="dropdown">
+                    Role
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/ORS/Role">Role</a>  
+                    <a class="dropdown-item" href="/ORS/RoleList">RoleList</a>
+                  
+                </div>
+              </li>
+
+
+       
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/ORS/Student" id="navbardrop" data-toggle="dropdown">
+              Student
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/ORS/Student">Student</a>  
+                <a class="dropdown-item" href="/ORS/StudentList">StudentList</a>
+              
+            </div>
+          </li>
+
+
+       
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/ORS/Subject" id="navbardrop" data-toggle="dropdown">
+              Subject
+            </a>
+            <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/ORS/Subject">Subject</a>
+                    <a class="dropdown-item" href="/ORS/SubjectList">SubjectList</a>
+              
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/ORS/AddFaculty" id="navbardrop" data-toggle="dropdown">
+                    AddFaculty
+                </a>
+                <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/ORS/AddFaculty">AddFaculty</a>
+                        <a class="dropdown-item" href="/ORS/AddFacultyList">AddFacultyList</a>
+                  
+                </div>
+              </li>  
+            
+              <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/ORS/TimeTable" id="navbardrop" data-toggle="dropdown">
+                        TimeTable
+                    </a>
+                    <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/ORS/TimeTable">TimeTable</a>
+                            <a class="dropdown-item" href="/ORS/TimeTableList">TimeTableList</a>
+                      
+                    </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/ORS/ChangePassword" id="navbardrop" data-toggle="dropdown">
+                            About
+                        </a>
+                        <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/ORS/ChangePassword">ChangePassword</a>
+                                <a class="dropdown-item" href="/ORS/Login">LOGOUT</a>
+
+                        </div>
+                        
+
+           </li> 
+        {% elif request.session.name == "Kiosk" %}
+        <li class="nav-item">
+            <a class="nav-link" href="/ORS/User">Profile Update</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/ORS/College" id="navbardrop" data-toggle="dropdown">
+                College
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/ORS/College">College</a>  
+                <a class="dropdown-item" href="/ORS/CollegeList">CollegeList</a>
+              
+            </div>
+          </li>
+    <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/ORS/CourseList" id="navbardrop" data-toggle="dropdown">
+                Course
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/ORS/Course">Course</a>  
+                <a class="dropdown-item" href="/ORS/CourseList">CourseList</a>
+              
+            </div>
+          </li>
+
+
+
+   
+    <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/ORS/Marksheet" id="navbardrop" data-toggle="dropdown">
+                Marksheet
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/ORS/Marksheet">Marksheet</a>  
+                <a class="dropdown-item" href="/ORS/MarksheetList">MarksheetList</a>
+                <a class="dropdown-item" href="/ORS/MarksheetMeritList">MarksheetMeritList</a>
+              
+            </div>
+          </li>
+
+
+
+   
+    <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/ORS/Role" id="navbardrop" data-toggle="dropdown">
+                Role
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/ORS/Role">Role</a>  
+                <a class="dropdown-item" href="/ORS/RoleList">RoleList</a>
+              
+            </div>
+          </li>
+
+
+   
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="/ORS/Student" id="navbardrop" data-toggle="dropdown">
+          Student
+        </a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="/ORS/Student">Student</a>  
+            <a class="dropdown-item" href="/ORS/StudentList">StudentList</a>
+          
+        </div>
+      </li>
+
+
+   
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="/ORS/Subject" id="navbardrop" data-toggle="dropdown">
+          Subject
+        </a>
+        <div class="dropdown-menu">
+                <a class="dropdown-item" href="/ORS/Subject">Subject</a>
+                <a class="dropdown-item" href="/ORS/SubjectList">SubjectList</a>
+          
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/ORS/AddFaculty" id="navbardrop" data-toggle="dropdown">
+                AddFaculty
+            </a>
+            <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/ORS/AddFaculty">AddFaculty</a>
+                    <a class="dropdown-item" href="/ORS/AddFacultyList">AddFacultyList</a>
+              
+            </div>
+          </li>  
+        
+          <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/ORS/TimeTable" id="navbardrop" data-toggle="dropdown">
+                    TimeTable
+                </a>
+                <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/ORS/TimeTable">TimeTable</a>
+                        <a class="dropdown-item" href="/ORS/TimeTableList">TimeTableList</a>
+                  
+                </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/ORS/ChangePassword" id="navbardrop" data-toggle="dropdown">
+                        About
+                    </a>
+                    <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/ORS/ChangePassword">ChangePassword</a>
+                            <a class="dropdown-item" href="/ORS/Login">LOGOUT</a>
+
+                    </div>
+                    
+
+       </li>
+           <!-- {% else %}
+                   <a class="navbar-brand" href="/ORS/Login">NCS</a> --> -->
+
+            {% endif%}
+        </ul>
+
+    </div>
+</nav>
+
+
+        
+
+<!-- <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+aria-haspopup="true" aria-expanded="false">  
+
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<a class="dropdown-item" href="/ORS/UserList">UserList</a>
+<a class="dropdown-item" href="#!login">Logout</a>
+<a class="dropdown-item" href="#!changePassword">Change Password</a>
+<a class="dropdown-item" href="#!profile">Edit Profile</a>
+</div></a> -->
+

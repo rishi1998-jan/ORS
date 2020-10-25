@@ -1,0 +1,157 @@
+
+
+from django.http import HttpResponse
+from .BaseCtl import BaseCtl
+from django.shortcuts import render
+from ORS.utility.DataValidator import DataValidator
+from service.models import Faculty
+from service.forms import FacultyForm
+from service.service.AddFacultyService import AddFacultyService
+from service.service.CollegeService import CollegeService
+
+class AddFacultyCtl(BaseCtl):
+    def preload(self,request):
+        self.page_list = CollegeService().search(self.form)
+        self.preload_data=self.page_list
+
+    # Populate Form from HTTP Request
+    def request_to_form(self, requestForm):
+        self.form["id"] = requestForm["id"]
+        self.form["firstName"] = requestForm["firstName"]
+        self.form["lastName"] = requestForm["lastName"]
+        self.form["email"] = requestForm["email"]
+        self.form["password"] = requestForm["password"]
+        # self.form["mobileNumber"] = requestForm["mobileNumber"]
+        self.form["address"] = requestForm["address"]
+        self.form["gender"] = requestForm["gender"]
+        self.form["dob"] = requestForm["dob"]
+        self.form["college_ID"] = requestForm["college_ID"]
+        self.form["subject_ID"] = requestForm["subject_ID"]
+        self.form["subjectName"] = requestForm["subjectName"]
+        self.form["course_ID"] = requestForm["course_ID"]
+        self.form["courseName"] = requestForm["courseName"]
+
+    # Populate Form from Model
+    def model_to_form(self, obj):
+        if (obj == None):
+            return
+        self.form["id"] = obj.id
+        self.form["firstName"] = obj.firstName
+        self.form["lastName"] = obj.lastName
+        self.form["email"] = obj.email
+        self.form["password"] = obj.password
+        # self.form["mobileNumber"] = obj.mobileNumber
+        self.form["address"] = obj.address
+        self.form["gender"] = obj.gender
+        self.form["dob"] = obj.dob
+        self.form["college_ID"] = obj.college_ID
+        self.form["subject_ID"] = obj.subject_ID
+        self.form["subjectName"] = obj.subjectName
+        self.form["course_ID"] = obj.course_ID
+        self.form["courseName"] = obj.courseName
+
+    # Convert form into module
+    def form_to_model(self, obj):
+        pk = int(self.form["id"])
+        if (pk > 0):
+            obj.id= pk
+        obj.firstName = self.form["firstName"]
+        obj.lastName = self.form["lastName"]
+        obj.email = self.form["email"]
+        obj.password = self.form["password"]
+        # obj.mobileNumber = self.form["mobileNumber"]
+        obj.address = self.form["address"]
+        obj.gender = self.form["gender"]
+        obj.dob = self.form["dob"]
+        obj.college_ID = self.form["college_ID"]
+        obj.subject_ID= self.form["subject_ID"]
+        obj.subjectName = self.form["subjectName"]
+        obj.course_ID = self.form["course_ID"]
+        obj.courseName = self.form["courseName"]
+        return obj
+
+    # Validate form
+    def input_validation(self):
+        super().input_validation()
+        inputError = self.form["inputError"]
+        if (DataValidator.isNull(self.form["firstName"])):
+            inputError["firstName"] = "Name can not be null"
+            self.form["error"] = True
+
+        if (DataValidator.isNull(self.form["lastName"])):
+            inputError["lastName"] = "lastName can not be null"
+            self.form["error"] = True
+
+        if (DataValidator.isNull(self.form["email"])):
+            inputError["email"] = "email can not be null"
+            self.form["error"] = True
+
+        if (DataValidator.isNull(self.form["password"])):
+            inputError["password"] = "password can not be null"
+            self.form["error"] = True
+
+        # if (DataValidator.isNull(self.form["mobileNumber"])):
+        #     inputError["mobileNumber"] = "password can not be null"
+        #     self.form["error"] = True    
+
+        if (DataValidator.isNull(self.form["address"])):
+            inputError["address"] = "address can not be null"
+            self.form["error"] = True
+
+        if (DataValidator.isNull(self.form["gender"])):
+            inputError["gender"] = "gender can not be null"
+            self.form["error"] = True
+
+        if (DataValidator.isNull(self.form["dob"])):
+            inputError["dob"] = "dob can not be null"
+            self.form["error"] = True
+
+        if (DataValidator.isNull(self.form["college_ID"])):
+            inputError["college_ID"] = "college_ID can not be null"
+            self.form["error"] = True
+
+        if (DataValidator.isNull(self.form["subject_ID"])):
+            inputError["subject_ID"] = "subject_ID can not be null"
+            self.form["error"] = True
+
+        if (DataValidator.isNull(self.form["subjectName"])):
+            inputError["subjectName"] = "subjectName can not be null"
+            self.form["error"] = True
+
+        if (DataValidator.isNull(self.form["course_ID"])):
+            inputError["course_ID"] = "course_ID can not be null"
+            self.form["error"] = True
+
+        if (DataValidator.isNull(self.form["courseName"])):
+            inputError["courseName"] = "courseName can not be null"
+            self.form["error"] = True
+
+        return self.form["error"]
+
+    # Display College page
+
+    def display(self, request, params={}):
+        if (params["id"] > 0):
+            r = self.get_service().get(params["id"])
+            self.model_to_form(r)
+        res = render(request, self.get_template(), {"form": self.form})
+        return res
+
+    # Submit College page
+    def submit(self, request, params={}):
+        r = self.form_to_model(Faculty())
+        self.get_service().save(r)
+        self.form["id"] = r.id
+        self.form["error"] = False
+        self.form["message"] = "Data is saved"
+        res = render(request, self.get_template(), {"form": self.form,"collegeList":self.preload_data})
+        return res
+
+    # Template html of Role page
+    def get_template(self):
+        return "ors/AddFaculty.html"
+
+    # Service of Role
+
+    def get_service(self):
+        return AddFacultyService()
